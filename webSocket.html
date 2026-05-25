@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const socket = new WebSocket("wss://javascript.info/article/websocket/demo/hello")
+        console.log('socket1:', socket)
+
+        socket.addEventListener('open', () => {
+            console.log('open socket')
+            console.log('send data')
+            socket.send('отправляемые данные')
+            socket.send({ id: 1, name: 'Ivan' })
+            console.log('socket2 (after open)', socket)
+        })
+
+        socket.addEventListener('message', (event) => {
+            console.log('got date:', event.data)
+        })
+
+        socket.onclose = (event) => {
+            if (event.wasClean) {
+                console.log(`соединение закрыто чисто, код: ${event.code}, причична: ${event.reason}`)
+            } else {
+                console.log(`соединение прервано, код: ${event.code}`)
+            }
+        };
+
+        socket.onerror = (event) => {
+            console.log('error', event)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+[26-Apr-2026 10:02:56 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
+[26-Apr-2026 10:09:32 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
+[26-Apr-2026 10:10:37 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
+[26-Apr-2026 10:16:33 Europe/Moscow] PHP Fatal error:  Uncaught Error: Call to undefined function num = () in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php:49
+Stack trace:
+#0 {main}
+  thrown in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 49
+[26-Apr-2026 10:23:13 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
+[27-Apr-2026 22:59:51 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
+[28-Apr-2026 22:28:30 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
+[30-Apr-2026 00:32:10 Europe/Moscow] PHP Warning:  Undefined variable $a in /home/a1178155/domains/derbugov.ru/public_html/learn-php/operations.php on line 6

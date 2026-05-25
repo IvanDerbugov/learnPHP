@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let timer = 1000;
+let heartbeatInterval; // Здесь будем хранить таймер пинга
+
+function connect() {
+    window.myPodlodka = new WebSocket("wss://echo.websocket.org");
+
+    window.myPodlodka.onopen = () => {
+        console.log("✅ Соединение УСТАНОВЛЕНО");
+        timer = 1000;
+
+        // ЗАПУСКАЕМ ПИНГ каждые 5 секунд
+        heartbeatInterval = setInterval(() => {
+            if (window.myPodlodka.readyState === WebSocket.OPEN) {
+                console.log("📡 Пинг...");
+                window.myPodlodka.send("ping"); 
+            }
+        }, 5000);
+    };
+
+    window.myPodlodka.onmessage = (event) => {
+        if (event.data === "ping") {
+            console.log("🛰️ Понг! (сервер живой)");
+        } else {
+            console.log("✉️ Сообщение:", event.data);
+        }
+    };
+
+    window.myPodlodka.onclose = () => {
+        console.log(`❌ СВЯЗЬ ПОТЕРЯНА. Реконнект через ${timer/1000} сек...`);
+        
+        // ОСТАНАВЛИВАЕМ ПИНГ при закрытии, чтобы не спамил в пустоту
+        clearInterval(heartbeatInterval);
+        
+        setTimeout(connect, timer);
+        if (timer < 30000) timer *= 2;
+    };
+
+    window.myPodlodka.onerror = () => {
+        window.myPodlodka.close(); // При любой ошибке идем в onclose
+    };
+}
+
+connect();
+
+    </script>
+</body>
+
+</html>
