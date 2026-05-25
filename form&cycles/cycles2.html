@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method="post" action="handlerForCycles.php">
+        <label for="age">возраст</label><br>
+        <input type="number" name="age" id="age" placeholder="2">
+        <button type="submit">отправить</button>
+    </form>
+    <br>
+    <br>
+    <div id="result"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        const result = document.getElementById('result');
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault()
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                if (!response.ok) throw new Error('HTTP ' + response.status)
+
+                const responseHtml = await response.text();
+                result.innerHTML = responseHtml;
+            } catch (error) {
+                result.textContent = `Ошибка: ${error.message}`
+                console.error(error)
+            }
+        })
+    </script>
+</body>
+
+</html>
