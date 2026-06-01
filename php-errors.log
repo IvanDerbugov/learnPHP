@@ -9,3 +9,5 @@ Stack trace:
 [27-Apr-2026 22:59:51 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
 [28-Apr-2026 22:28:30 Europe/Moscow] PHP Warning:  Undefined variable $num in /home/a1178155/domains/derbugov.ru/public_html/learn-php/index.php on line 48
 [30-Apr-2026 00:32:10 Europe/Moscow] PHP Warning:  Undefined variable $a in /home/a1178155/domains/derbugov.ru/public_html/learn-php/operations.php on line 6
+[01-Jun-2026 19:47:42 UTC] PHP Warning:  Array to string conversion in D:\WEB\learnPHP\foreach.php on line 6
+[01-Jun-2026 19:47:42 UTC] PHP Warning:  Array to string conversion in D:\WEB\learnPHP\foreach.php on line 6
