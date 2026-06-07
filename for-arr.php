@@ -26,7 +26,7 @@ foreach ($arr as $key => $value) {
 echo '----------' . "<br/>" . 
 '$arr after ksort() - for' . "<br/>" . 
 '----------' . "<br/>";
-for ($i = 0; i < count($arr); $i++) {
+for ($i = 0; $i < count($arr); $i++) {
     echo "$arr[i]" . "<br/>";
 };
 
