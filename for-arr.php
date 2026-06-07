@@ -15,23 +15,23 @@ foreach ($arr as $key => $value) {
 ksort($arr); //сортирну массив по ключам, мутабельный
 // $arrSort = krsort($arr); //вернёт 1 как просто успех
 
-echo "<br/>" . '----------' . "<br/>" . 
-'$arr after ksort() - foreach' . "<br/>" . 
-'----------' . "<br/>";
-foreach ($arr as $key => $value) {
-    $display = is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value;
-    echo "$key - $display<br/>";
-}
+// echo "<br/>" . '----------' . "<br/>" . 
+// '$arr after ksort() - foreach' . "<br/>" . 
+// '----------' . "<br/>";
+// foreach ($arr as $key => $value) {
+//     $display = is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value;
+//     echo "$key - $display<br/>";
+// }
 
-echo '----------' . "<br/>" . 
-'$arr after ksort() - for' . "<br/>" . 
-'----------' . "<br/>";
-for ($i = 0; $i < count($arr); $i++) {
-    echo "$arr[i]" . "<br/>";
-};
+// echo '----------' . "<br/>" . 
+// '$arr after ksort() - for' . "<br/>" . 
+// '----------' . "<br/>";
+// for ($i = 0; $i < count($arr); $i++) {
+//     json_encode("$arr[$i]" . "<br/>");
+// };
 
-$test = 0;
-echo "<br/>" . '$test = ' . "$test"; 
+// $test = 0;
+// echo "<br/>" . '$test = ' . "$test"; 
 
-$test = 1;
-echo "<br/>" . '$test = ' . "$test"; 
+// $test = 1;
+// echo "<br/>" . '$test = ' . "$test"; 

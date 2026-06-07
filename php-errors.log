@@ -11,3 +11,15 @@ Stack trace:
 [30-Apr-2026 00:32:10 Europe/Moscow] PHP Warning:  Undefined variable $a in /home/a1178155/domains/derbugov.ru/public_html/learn-php/operations.php on line 6
 [01-Jun-2026 19:47:42 UTC] PHP Warning:  Array to string conversion in D:\WEB\learnPHP\foreach.php on line 6
 [01-Jun-2026 19:47:42 UTC] PHP Warning:  Array to string conversion in D:\WEB\learnPHP\foreach.php on line 6
+[07-Jun-2026 19:19:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 8
+[07-Jun-2026 19:19:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 9
+[07-Jun-2026 19:19:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 10
+[07-Jun-2026 19:26:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 8
+[07-Jun-2026 19:26:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 9
+[07-Jun-2026 19:26:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 10
+[07-Jun-2026 19:28:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 8
+[07-Jun-2026 19:28:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 9
+[07-Jun-2026 19:28:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr.php:1) in D:\WEB\learnPHP\error-config.php on line 10
+[07-Jun-2026 19:38:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr2.php:1) in D:\WEB\learnPHP\error-config.php on line 8
+[07-Jun-2026 19:38:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr2.php:1) in D:\WEB\learnPHP\error-config.php on line 9
+[07-Jun-2026 19:38:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\WEB\learnPHP\render-table-arr2.php:1) in D:\WEB\learnPHP\error-config.php on line 10
