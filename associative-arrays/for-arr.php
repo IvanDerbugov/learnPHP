@@ -1,5 +1,5 @@
 <?
-require_once __DIR__ . '/error-config.php';
+require_once __DIR__ . '/../error-config.php';
 
 $arr = [0=> 'нуль', 1=>['name' => 'Ivan'], 3=>[0,1,2,3], 10=>'ten'];
 

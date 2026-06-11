@@ -14,7 +14,7 @@
 <body>
     <table>
     <?
-    require_once __DIR__ . '/error-config.php';
+    require_once __DIR__ . '/../error-config.php';
 
     $users = ['Jessy', 'Bob', ['Merry', 'Cem'], 'Pit', 'Rob', [[['Sausy']], 'Veranda']];
     $countTd = 0; //счётчик чтобы в нужный момент tr сделать

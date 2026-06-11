@@ -1,5 +1,5 @@
 <?
-require_once __DIR__ . '/error-config.php';
+require_once __DIR__ . '/../error-config.php';
 $countries = ["Germany" => "Berlin", "France" => "Paris", "Spain" => "Madrid"];
 // $countries["Germany"] = null; 
 unset($countries["Germany"]);
