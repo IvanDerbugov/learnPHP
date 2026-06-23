@@ -21,6 +21,7 @@ $phones = array(
     "apple"=> array("iPhone 12", "iPhone X", "iPhone 12 Pro") , 
     "samsumg"=>array("Samsung Galaxy S20", "Samsung Galaxy S20 Ultra"),
     "nokia" => array("Nokia 8.3", "Nokia 3.4"));
+    // $phones['apple']['iPhone 12 Pro'] = 'iPhone 12 Pro Max'; //заменить по ключу значение
     $selectedBrand = $_GET['brand'];
 
     echo "<form method='get' action=''> 
