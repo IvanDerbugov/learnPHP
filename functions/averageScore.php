@@ -1,3 +1,27 @@
+<?php
+require_once __DIR__ . '/../error-config.php';
+
+function calculateAverageScore(array $scores): ?array
+{
+    if (count($scores) === 0) {
+        return null;
+    }
+    $sum = 0;
+    foreach ($scores as $estimation) {
+        $sum += $estimation;
+    }
+    return [
+        'scores' => array_values($scores),
+        'average' => $sum / count($scores),
+    ];
+}
+
+$currentResult = null;
+if (isset($_GET['estimation'])) {
+    $estimations = array_filter($_GET['estimation'], fn($v) => $v !== '');
+    $currentResult = calculateAverageScore($estimations);
+}
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -135,6 +159,53 @@
             background: #4f46e5;
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
         }
+
+        .history-section {
+            margin-top: 1.5rem;
+        }
+
+        .history-section h2 {
+            margin: 0 0 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .history-item {
+            padding: 0.75rem 1rem;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .history-item__average {
+            font-weight: 600;
+            color: #4f46e5;
+        }
+
+        .history-item__meta {
+            margin-top: 0.25rem;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        #clearHistory {
+            margin-top: 0.75rem;
+            background: #fff;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        #clearHistory:hover {
+            background: #fef2f2;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.12);
+        }
     </style>
 </head>
 
@@ -143,23 +214,10 @@
         <h1>Средний балл</h1>
 
         <?php
-        require_once __DIR__ . '/../error-config.php'; //вывод ошибок и логирование
-        function getAverageScore($scores)
-        {
-            $sum = 0; //область видимости - функция, не как в JS - фигурные скобки
-            foreach ($scores as $estimation) {
-                $sum += $estimation;
-            }
-            if (count($scores) === 0) {
-                echo '<p class="result result--empty">нет оценок</p>';
-                return;
-            }
-            $result = $sum / count($scores); //при делении на 0 ошибку выбивает
-            echo "<p class=\"result\">средний балл: $result</p>";
-        }
-        if (isset($_GET['estimation'])) {
-            $estimations = array_filter($_GET['estimation'], fn($v) => $v !== ''); //фильтр допускающий нуль и не допускающий ''
-            getAverageScore($estimations);
+        if ($currentResult === null && isset($_GET['estimation'])) {
+            echo '<p class="result result--empty">нет оценок</p>';
+        } elseif ($currentResult !== null) {
+            echo '<p class="result">средний балл: ' . $currentResult['average'] . '</p>';
         }
         ?>
 
@@ -179,16 +237,105 @@
                 </button>
             </div>
         </form>
+
+        <section class="history-section" id="historySection" hidden>
+            <h2>Предыдущие результаты</h2>
+            <div class="history-list" id="historyList"></div>
+            <button type="button" id="clearHistory" hidden>
+                очистить предыдущие результаты
+            </button>
+        </section>
     </div>
 
     <script>
+        const STORAGE_KEY = 'learn-php/averageScoreHistory'
+
         const btnAddInput = document.getElementById('addInput')
         const div = document.getElementById('wrapper-inputs')
+        const historySection = document.getElementById('historySection')
+        const historyList = document.getElementById('historyList')
+        const clearHistoryBtn = document.getElementById('clearHistory')
         const newInput = '<div class="input-row"><label>Оценка</label><input type="number" name="estimation[]"></div>'
 
         btnAddInput.addEventListener('click', (e) => {
             e.preventDefault()
             div.insertAdjacentHTML('beforeend', newInput)
+        })
+
+        function loadHistory() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY)
+                return raw ? JSON.parse(raw) : []
+            } catch {
+                return []
+            }
+        }
+
+        function saveHistory(items) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+        }
+
+        function formatDate(iso) {
+            return new Date(iso).toLocaleString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+            })
+        }
+
+        function isSameEntry(a, b) {
+            return a.average === b.average && JSON.stringify(a.scores) === JSON.stringify(b.scores)
+        }
+
+        function renderHistory() {
+            const history = loadHistory()
+
+            if (history.length === 0) {
+                historySection.hidden = true
+                clearHistoryBtn.hidden = true
+                historyList.innerHTML = ''
+                return
+            }
+
+            historySection.hidden = false
+            clearHistoryBtn.hidden = false
+            historyList.innerHTML = history.map((item) => `
+                <div class="history-item">
+                    <div class="history-item__average">средний балл: ${item.average}</div>
+                    <div>оценки: ${item.scores.join(', ')}</div>
+                    <div class="history-item__meta">${formatDate(item.date)}</div>
+                </div>
+            `).join('')
+        }
+
+        function appendCurrentResult() {
+            const newResult = <?php echo $currentResult !== null
+                ? json_encode($currentResult, JSON_UNESCAPED_UNICODE)
+                : 'null'; ?>;
+
+            if (!newResult) {
+                return
+            }
+
+            const history = loadHistory()
+            const entry = { ...newResult, date: new Date().toISOString() }
+
+            if (history.length > 0 && isSameEntry(history[0], entry)) {
+                return
+            }
+
+            history.unshift(entry)
+            saveHistory(history)
+        }
+
+        appendCurrentResult()
+        renderHistory()
+
+        clearHistoryBtn.addEventListener('click', () => {
+            localStorage.removeItem(STORAGE_KEY)
+            renderHistory()
         })
     </script>
 </body>
