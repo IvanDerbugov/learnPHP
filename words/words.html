@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const whatLearn = prompt(`какое слово будем учить? (слово-перевод)`, 'world-мир').toLowerCase()
+        const ruWord = whatLearn.replace(/[^а-яёА-ЯЁ]/g, '') //оставляем только кириллицу
+
+        const enWord = whatLearn.replace(/[^a-zA-Z]/g, '') //вырезаем всё кроме латинины
+        const receivedWord = prompt(`перевидите слово \"${ruWord}\"`).toLowerCase()
+
+        if (receivedWord === enWord) alert ('right')
+        else alert ('not right')
+    </script>
+</body>
+</html>
