@@ -14,4 +14,4 @@ if(isset($_GET['model'])) {
     echo 'show all models'  . "<br/>";
 };
 
-echo 'You\'re choose' . "\"" . $brand . "\"" . '-' . "\"" . $model . "\"";
+echo 'You\'re choose' . "\"" . $brand . "\"" . '-' . "\"" . $model . "\""; //You're choose"mers"-"x5"
