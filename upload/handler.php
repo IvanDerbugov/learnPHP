@@ -9,5 +9,6 @@ if ($_FILES && $_FILES['filename']['error'] == UPLOAD_ERR_OK) { // или мож
     $name = $_FILES['filename']['name'];
     echo "<br/>"  . "<br/>" . '============='  . "<br/>";
     move_uploaded_file($_FILES['filename']['tmp_name'], __DIR__ . '/files/' . $name);
+    echo "<br/>" . 'Файл успешно загружен';
 }
 ?>
