@@ -7,8 +7,20 @@ var_dump($_POST); // но тут будет пустто, тк сервер на
 
 if ($_FILES && $_FILES['filename']['error'] == UPLOAD_ERR_OK) { // или можно было $_FILES['filename']['error'] == 0 (UPLOAD_ERR_OK == 0)
     $name = $_FILES['filename']['name'];
-    echo "<br/>"  . "<br/>" . '============='  . "<br/>";
-    move_uploaded_file($_FILES['filename']['tmp_name'], __DIR__ . '/files/' . $name);
+    echo "<br/>" . "<br/>" . '=============' . "<br/>";
+
+    $path = __DIR__ . '/files/'; //путь для сохранения
+    function saveFile()
+    {
+        global $path, $name;
+        move_uploaded_file($_FILES['filename']['tmp_name'], $path . $name);
+    }
+    if (is_dir($path)) {
+        saveFile();
+    } else {
+        mkdir($path, 0755, true);
+        saveFile();
+    }
     echo "<br/>" . 'Файл успешно загружен';
 }
 ?>
