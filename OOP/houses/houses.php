@@ -38,5 +38,5 @@ $cheapestHouse = function () use ($houses) {
 $cheapestPrice = $cheapestHouse()->price;
 $cheapestRoom = $cheapestPrice / $cheapestHouse()->numRooms;
 
-echo "<br/>" . 'самый дешёвый дом стоит: ' . $cheapestPrice() . ' руб';
-echo "одна комната самого дешёвого дома стоит: ";
+echo "<br/>" . 'самый дешёвый дом стоит: ' . "$cheapestPrice" . ' руб' . "<br/>";
+echo "одна комната самого дешёвого дома стоит: " . "$cheapestRoom" . ' руб' . "<br/>";
