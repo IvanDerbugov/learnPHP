@@ -1,6 +1,10 @@
 <?
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/error-config.php';
 class House {
     public $numLastOwners, $numRooms, $price;
+    function pricePerRoom () {
+        echo "($this->price / $this->numRooms)";
+    }
 }
 
 
@@ -22,13 +26,17 @@ $house_Ilimskay_42->numLastOwners = 1;
 //важно добавлять сюда каждый новый дом
 $houses = [$house_Ilimskay_33, $house_Ilimskay_40, $house_Ilimskay_42];
 
-$cheapestPrice = function () use ($houses) {
-    $minPrice = $houses[0]->price; //просто подставляем первый дом
+$cheapestHouse = function () use ($houses) {
+    $minHouse = $houses[0]; //просто подставляем первый дом, потенциально он самый дешёвый
     foreach ($houses as $house) {
-        $currentPrice = $house->price; 
-        if ($currentPrice < $minPrice) $minPrice = $currentPrice; 
+        $currentHousePrice = $house->price;
+        if ($minHouse->price > $currentHousePrice) $minHouse = $house;
     }
-    return $minPrice;
+    return $minHouse;
 };
 
+$cheapestPrice = $cheapestHouse()->price;
+$cheapestRoom = $cheapestPrice / $cheapestHouse()->numRooms;
+
 echo "<br/>" . 'самый дешёвый дом стоит: ' . $cheapestPrice() . ' руб';
+echo "одна комната самого дешёвого дома стоит: ";
