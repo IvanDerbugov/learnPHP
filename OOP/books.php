@@ -3,8 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/error-config.php';
 class Books {
     const CHEAP_BOOKS_COST_MAX = 10;
     const EXPENSIVE_BOOKS_COST_MIN = 20;
-    public $name, $autor, $pages, $price, $rating;
-    function __construct($name, $autor, $pages, $price, $rating = null) {
+    function __construct(public $name, public $autor, public $pages, public $price, public $rating = null) {
         $this->name = $name;
         $this->autor = $autor;
         $this->pages = $pages;
