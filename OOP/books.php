@@ -19,9 +19,18 @@ class Books {
             echo "price book \"$this->name\" is middle" . "<br/>";
         }
     }
+
+    function __destruct() {
+        echo $this->name . ' уничтожена'  . "<br/>";
+    }
 }
 
-$bookTomAndJerry = new Books('TomAndJerry', 'unknown', '360', 30);
+$bookTomAndJerry = new Books('Tom and Jerry', 'unknown', 360, 30);
 $bookTomAndJerry -> bookReview();
-$bookRecepts = new Books('Recepts', 'unknown', '100', 17, 5);
+$bookRecepts = new Books('Recepts', 'unknown', 100, 17, 5);
 $bookRecepts -> bookReview();
+// unset($bookRecepts);
+echo 'скрипт ещё идёт...'  . "<br/>";
+
+$bookGarryPotter = new Books('Garry Potter', 'Tom Royling', 1050, 35, 4.8);
+$bookGarryPotter -> bookReview();
