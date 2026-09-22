@@ -13,29 +13,60 @@ class Account
         // $this->sum = $sum; // тоже самое
     }
 
-    function getSumFrom($otherAccount, $money)
-    {
-        $otherAccount->sum -= $money;
-        $this->sum += $money;
-    }
-
     //тренировка работы со строками для отображения строки в красивом формате для пользователя
-    function displayBeautifulName () {
+    function displayBeautifulName()
+    {
         $result = explode('_', $this->ownerWallet);
         $firstBitResult = ucfirst($result[0]);
         $lastBitResult = array_slice($result, 1);
-        $lastBitResult = implode(' ' , $lastBitResult);
+        $lastBitResult = implode(' ', $lastBitResult);
         $lastBitResult = strtoupper($lastBitResult);
-        $result = $firstBitResult . ' ' .  $lastBitResult;
+        $result = $firstBitResult . ' ' . $lastBitResult;
         return $result; //derbugov_i_n -> Derbugov I N
+    }
+    function getSumFrom($otherAccount, $money)
+    {
+        if ($money > $otherAccount->sum) {
+            echo "На аккауте \"{$otherAccount->ownerWallet}\" недостаточно средств для получение оттуда" . "<br/>";
+            return;
+        }
+        $otherAccount->sum -= $money;
+        $this->sum += $money;
+        echo "Получено {$money} с аккаунта \"{$otherAccount->displayBeautifulName()}\" на аккаунт \"{$this->displayBeautifulName()}\"" . "<br/>";
+    }
+
+    function sendSumFrom($otherAccount, $money)
+    {
+        if ($money > $this->sum) {
+            echo "На Вашем аккаунте ({$this->ownerWallet}) недостаточно средств для перевода. Необходимо: {$money}, доступно: {$this->sum}. Пополните счёт." . "<br/>";
+            return;
+        }
+        $this->sum -= $money;
+        $otherAccount->sum += $money;
+        echo "Отправлено {$money} с аккаунта \"{$this->displayBeautifulName()}\" на аккаунт \"{$otherAccount->displayBeautifulName()}\"" . "<br/>";
     }
 
     function printSum()
     {
-        echo "на счёте {$this->displayBeautifulName()} {$this->sum}\$"  . "<br/>";
+        echo "на счёте {$this->displayBeautifulName()} {$this->sum}\$" . "<br/>";
     }
 }
 
-$wallet_1 = new Account('derbugov_i_n');
+$wallet_1 = new Account('derbugov_i_n', 500);
 $wallet_2 = new Account('petrov_g_i', 1000);
+$wallet_3 = new Account('rich woman', 15000);
+$wallet_1->printSum();
 $wallet_2->printSum();
+
+//получить деньги с другого счёта. на рабочем варианте нужно права ещё для этого делать
+$wallet_1->getSumFrom($wallet_2, 500);
+$wallet_1->printSum();
+$wallet_2->printSum();
+echo '=======' . "<br/>";
+$wallet_1->getSumFrom($wallet_3, 2000);
+$wallet_3->sendSumFrom($wallet_1, 5000);
+$wallet_3->sendSumFrom($wallet_2, 1000);
+$wallet_1->printSum();
+$wallet_2->printSum();
+$wallet_3->printSum();
+// echo "{$wallet_3->displayBeautifulName()}";
