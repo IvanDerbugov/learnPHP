@@ -13,6 +13,12 @@ class Account
         // $this->sum = $sum; // тоже самое
     }
 
+    public static $bankName = 'IvanBank';
+    function getDateNow()
+    {
+        return 'Дата: ' . date('H:i:s Y-m-d');
+    }
+
     //тренировка работы со строками для отображения строки в красивом формате для пользователя
     function displayBeautifulName()
     {
@@ -32,7 +38,20 @@ class Account
         }
         $otherAccount->sum -= $money;
         $this->sum += $money;
-        echo "Получено {$money} с аккаунта \"{$otherAccount->displayBeautifulName()}\" на аккаунт \"{$this->displayBeautifulName()}\"" . "<br/>";
+        //старый способ вывода неполной инфы
+        // echo "Получено {$money} с аккаунта \"{$otherAccount->displayBeautifulName()}\" на аккаунт \"{$this->displayBeautifulName()}\"" . "<br/>";
+        $dateNow = $this->getDateNow();
+        $bankName = self::$bankName;
+        echo "<pre>";
+        echo <<<TEXT
+        Получено {$money}\$
+        C аккаунта "{$otherAccount->displayBeautifulName()}"
+        На аккаунт "{$this->displayBeautifulName()}"
+        Остаток: {$this->sum}\$
+        $dateNow
+        $bankName
+        TEXT;
+        echo "</pre>";
     }
 
     function sendSumFrom($otherAccount, $money)
@@ -43,7 +62,18 @@ class Account
         }
         $this->sum -= $money;
         $otherAccount->sum += $money;
-        echo "Отправлено {$money} с аккаунта \"{$this->displayBeautifulName()}\" на аккаунт \"{$otherAccount->displayBeautifulName()}\"" . "<br/>";
+        // echo "Отправлено {$money} с аккаунта \"{$this->displayBeautifulName()}\" на аккаунт \"{$otherAccount->displayBeautifulName()}\"" . "<br/>";
+        $dateNow = $this->getDateNow();
+        $bankName = self::$bankName;
+        echo "<pre>";
+        echo <<<TEXT
+        Отправлено {$money}\$
+        С аккаунта "{$this->displayBeautifulName()}"
+        На аккаунт "{$otherAccount->displayBeautifulName()}"
+        Остаток: {$this->sum}\$
+        $dateNow
+        $bankName
+        TEXT;
     }
 
     function printSum()
@@ -70,3 +100,6 @@ $wallet_1->printSum();
 $wallet_2->printSum();
 $wallet_3->printSum();
 // echo "{$wallet_3->displayBeautifulName()}";
+
+echo '=======' . "<br/>";
+// echo $wallet_1->sum; //нельзя к privet напрямую
