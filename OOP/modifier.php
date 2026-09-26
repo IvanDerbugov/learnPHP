@@ -7,7 +7,7 @@ if (file_exists($path)) {
 
 class Account
 {
-    function __construct(public $ownerWallet, private $sum = 0)
+    function __construct(public $ownerWallet, protected $sum = 0)
     {
         // $this->ownerWallet = $ownerWallet; //избыточно, пхп 8 сам присваивает на этапе public
         // $this->sum = $sum; // тоже самое
@@ -82,24 +82,29 @@ class Account
     }
 }
 
+//тесты операций по аккаунтам
 $wallet_1 = new Account('derbugov_i_n', 500);
-$wallet_2 = new Account('petrov_g_i', 1000);
-$wallet_3 = new Account('rich woman', 15000);
-$wallet_1->printSum();
-$wallet_2->printSum();
+// $wallet_2 = new Account('petrov_g_i', 1000);
+// $wallet_3 = new Account('rich woman', 15000);
+// $wallet_1->printSum();
+// $wallet_2->printSum();
 
 //получить деньги с другого счёта. на рабочем варианте нужно права ещё для этого делать
-$wallet_1->getSumFrom($wallet_2, 500);
-$wallet_1->printSum();
-$wallet_2->printSum();
-echo '=======' . "<br/>";
-$wallet_1->getSumFrom($wallet_3, 2000);
-$wallet_3->sendSumFrom($wallet_1, 5000);
-$wallet_3->sendSumFrom($wallet_2, 1000);
-$wallet_1->printSum();
-$wallet_2->printSum();
-$wallet_3->printSum();
+// $wallet_1->getSumFrom($wallet_2, 500);
+// $wallet_1->printSum();
+// $wallet_2->printSum();
+// echo '=======' . "<br/>";
+// $wallet_1->getSumFrom($wallet_3, 2000);
+// $wallet_3->sendSumFrom($wallet_1, 5000);
+// $wallet_3->sendSumFrom($wallet_2, 1000);
+// $wallet_1->printSum();
+// $wallet_2->printSum();
+// $wallet_3->printSum();
 // echo "{$wallet_3->displayBeautifulName()}";
 
-echo '=======' . "<br/>";
 // echo $wallet_1->sum; //нельзя к privet напрямую
+
+class SavingsAccount extends Account
+{
+    
+}
