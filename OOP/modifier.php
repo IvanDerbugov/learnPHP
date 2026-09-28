@@ -106,5 +106,11 @@ $wallet_1 = new Account('derbugov_i_n', 500);
 
 class SavingsAccount extends Account
 {
-    
+    function addPracent($pracent) {
+        $this->sum *= 1 + $pracent/100;
+    }
 }
+
+$wallet_4 = new SavingsAccount('sidorov_a_a', 1000);
+$wallet_4->addPracent(10);
+$wallet_4->printSum();
