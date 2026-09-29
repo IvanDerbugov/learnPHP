@@ -14,7 +14,7 @@ class Person
     }
     function sayHi()
     {
-        echo "Привет, меня зовут {$this->name}";
+        echo "Привет, меня зовут {$this->name}" . "<br/>";
     }
 
     function printAge()
@@ -26,20 +26,21 @@ class Person
         Возраст: {$this->age};
         Пол: {$gender};
         TEXT; 
+        echo "</pre>" . "<br/>";
     }
 
-    // TODO переписать обращения для статика
-    // static function whenRetirenment () {
-    //     $rightRetirenment = $this->isMan ? $retirenmentAgeMan : $retirenmentAgeWoman;
-    //     $yearsLeft = $rightRetirenment - $this->age;
-    //     if($yearsLeft >= 0) {
-    //         echo "Пора на пенсию, {$this->name}!"
-    //     } else {
-    //         echo "До пенсии {$yearsLeft} лет."
-    //     }
-    // }
+    static function whenRetirenment ($person) {
+        $rightRetirenment = $person->isMan ? self::$retirenmentAgeMan : self::$retirenmentAgeWoman;
+        $yearsLeft = $rightRetirenment - $person->age;
+        if($yearsLeft <= 0) {
+            echo "Пора на пенсию, {$person->name}!";
+        } else {
+            echo "До пенсии {$yearsLeft} лет.";
+        }
+    }
 }
 
-$lida = new Person('Lida', 58, 0);
+$lida = new Person('Lida', 56, 0);
 $lida->sayHi();
 $lida->printAge();
+Person::whenRetirenment ($lida);
