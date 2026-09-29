@@ -7,8 +7,8 @@ if (file_exists($path)) {
 
 class Person
 {
-    static $retirenmentAgeMan = 63;
-    static $retirenmentAgeWoman = 58;
+    const retirenmentAgeMan = 63;
+    const retirenmentAgeWoman = 58;
     function __construct(public $name, public $age, public $isMan)
     {
     }
@@ -26,16 +26,17 @@ class Person
         Возраст: {$this->age};
         Пол: {$gender};
         TEXT; 
-        echo "</pre>" . "<br/>";
+        echo "</pre> <br/>";
     }
 
+    //хотя в данном случае больше подходит без static
     static function whenRetirenment ($person) {
-        $rightRetirenment = $person->isMan ? self::$retirenmentAgeMan : self::$retirenmentAgeWoman;
+        $rightRetirenment = $person->isMan ? self::retirenmentAgeMan : self::retirenmentAgeWoman;
         $yearsLeft = $rightRetirenment - $person->age;
         if($yearsLeft <= 0) {
             echo "Пора на пенсию, {$person->name}!";
         } else {
-            echo "До пенсии {$yearsLeft} лет.";
+            echo "До пенсии {$yearsLeft} лет / год / года.";
         }
     }
 }
