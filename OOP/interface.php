@@ -14,7 +14,8 @@ interface Product
 }
 interface Sale
 {
-    public function dateSale(): string;
+    public string $dateSale { get; set; }
+    public int $monthsGuarantee { get; set; }
 }
 interface SaleTechnic extends Product, Sale
 {
@@ -22,24 +23,33 @@ interface SaleTechnic extends Product, Sale
 
 class SalePhones implements SaleTechnic
 {
-    function __construct(public string $modelPhone, public int $price)
+    function __construct(public string $modelPhone, public int $price, public int $monthsGuarantee = 0, public string $dateSale = '')
     {
-    }
-    function dateSale(): string
-    {
-        return date('H:i:s d-m-Y');//всё время новая, надо фиксировать
+        if ($monthsGuarantee < 0) {
+            throw new Exception('Гарантия не может быть отрицательной');
+        }
+        $this->dateSale = date('H:i:s d-m-Y');
     }
 
-    function cheque () {
+    function cheque()
+    {
         echo "Спасибо за покупку {$this->modelPhone} в нашем магазине!" . "<br/>";
-        echo "Цена: {$this->price}" . "<br/>";
-        echo "Дата покупки: {$this->dateSale()}";
+        echo "Цена: {$this->price}\$" . "<br/>";
+        echo "Дата покупки: {$this->dateSale}" . "<br/>";
+        // echo get_debug_type($this->dateSale);
+        if ($this->monthsGuarantee) {
+            echo "Гарантия {$this->monthsGuarantee} месяца(ев)" . "<br/>";
+        } else echo "Гарантии нет" . "<br/>";
         //добавить дату конца гаратнии
+        echo "<pre>";
         echo <<<TEXT
-        
-        TEXT;//добавить список рекламы
+        Скидка 10% в аквапарк "Волна" по промокоду "Здравствуй осень".
+        Скидка 3% на АЗС по промокоду "Газ".
+        ==================
+        TEXT;
+        echo "</pre>";
     }
 }
 
-$client1 = new SalePhones('iphone-15', 800);
+$client1 = new SalePhones('iphone-15', 800, 24);
 $client1->cheque();
