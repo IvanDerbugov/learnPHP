@@ -16,16 +16,25 @@ abstract class Messenger{
 
 class Vanyafon extends Messenger {
     function sendMessage($message, $recipient) {
-        echo "сообщение {$message} отправлено {$recipient}";
+        echo "сообщение '{$message}' отправлено '{$recipient}'" . "<br/>";
     }
 }
 
 
 
-$userId_1 = new Vanyafon('Ivan');
+$userVanyafonId_1 = new Vanyafon('Ivan');
 if(isset($_GET['exit'])) {
     $userId_1->closeProgram();
 }
+
+class Telegram extends Messenger {
+    function sendMessage($message, $recipient) {
+        $date = date('H:i:s');
+        echo "ваше сообщение '{$message}' в {$date} было отправлено '{$recipient}'";
+    }
+}
+$userTgId_1 = new Telegram('Ivan');
+$userTgId_1->sendMessage('hi', 'sister');
 
 ?>
 <!DOCTYPE html>
