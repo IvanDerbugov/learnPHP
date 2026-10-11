@@ -1,0 +1,21 @@
+<?
+$path = $_SERVER['DOCUMENT_ROOT'] . '/learn-php/error-config.php';
+if (file_exists($path)) {
+    require_once $path;
+} else echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-coin</title>
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="icon" href="./img/coin-cash.svg">
+</head>
+<body>
+    <? include "./partial/header.html"; ?>
+</body>
+</html>

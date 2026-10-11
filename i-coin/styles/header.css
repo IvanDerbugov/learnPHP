@@ -1,0 +1,13 @@
+header.container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #E0E0E0;
+}
+header img {
+  width: 30px;
+  height: 30px;
+}
+header nav ul {
+  display: flex;
+  gap: 20px;
+}/*# sourceMappingURL=header.css.map */
