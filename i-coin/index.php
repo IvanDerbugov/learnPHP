@@ -11,11 +11,18 @@ if (file_exists($path)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>i-coin</title>
-    <link rel="stylesheet" href="./styles/base.css">
-    <link rel="stylesheet" href="./styles/header.css">
-    <link rel="icon" href="./img/coin-cash.svg">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="icon" href="img/coin-cash.svg">
 </head>
 <body>
     <? include "./partial/header.html"; ?>
+    <main class="container">
+        <? require_once __DIR__ . '/service/Accounts.php'; ?>
+    </main>
+
+    <? include "./partial/modal-crate-acc.html"; ?>
+    <script src="scripts/modal.js"></script>
 </body>
 </html>

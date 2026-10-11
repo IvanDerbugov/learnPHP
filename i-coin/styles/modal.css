@@ -1,0 +1,52 @@
+.modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  cursor: pointer;
+}
+.modal.active {
+  display: flex;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  cursor: auto;
+}
+.modal-content-close {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.5);
+  font-size: 20px;
+  width: 25px;
+  height: 25px;
+}
+.modal .type-btn {
+  display: flex;
+  gap: 10px;
+}
+.modal .type-btn button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: rgba(43, 0, 255, 0.7137254902);
+  transition: all 0.3s ease;
+}
+.modal .type-btn button:hover {
+  transform: scale(1.05);
+}
+.modal .type-btn .savings-btn {
+  background-color: rgba(13, 255, 0, 0.6470588235);
+  color: #000;
+}/*# sourceMappingURL=modal.css.map */
