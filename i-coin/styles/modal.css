@@ -31,9 +31,32 @@
   width: 25px;
   height: 25px;
 }
-.modal .type-btn {
+.modal-content-form {
+  display: none;
+}
+.modal-content-form.active {
   display: flex;
+}
+.modal-content-form button {
+  background-color: rgba(43, 0, 255, 0.7137254902);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.modal-content-form button:hover {
+  transform: scale(1.05);
+}
+.modal-content-form button[data-type=savings] {
+  background-color: rgba(13, 255, 0, 0.6470588235);
+  color: #000;
+}
+.modal .type-btn {
+  display: none;
   gap: 10px;
+}
+.modal .type-btn.active {
+  display: flex;
 }
 .modal .type-btn button {
   width: 100%;
@@ -45,6 +68,9 @@
 }
 .modal .type-btn button:hover {
   transform: scale(1.05);
+}
+.modal .type-btn button.hide {
+  display: none;
 }
 .modal .type-btn .savings-btn {
   background-color: rgba(13, 255, 0, 0.6470588235);

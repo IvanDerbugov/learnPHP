@@ -34,12 +34,42 @@
             width: 25px;
             height: 25px;
         }
+
+        //.modal-content-form
+        &-form {
+            display: none;
+
+            &.active {
+                display: flex;
+            }
+
+            button {
+                background-color: #2b00ffb6;
+                color: #fff;
+                padding: 10px;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+
+                &[data-type="savings"] {
+                    background-color: #0dff00a5;
+                    color: #000;
+                }
+            }
+        }
     }
 
     //.modal .type-btn
     .type-btn {
-        display: flex;
+        display: none;
         gap: 10px;
+
+        &.active {
+            display: flex;
+        }
 
         //.modal .type-btn button
         button {
@@ -52,6 +82,10 @@
 
             &:hover {
                 transform: scale(1.05);
+            }
+
+            &.hide {
+                display: none;
             }
         }
 
