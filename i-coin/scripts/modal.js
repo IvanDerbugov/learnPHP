@@ -1,47 +1,62 @@
-const btnRegistration = document.getElementById('registration-btn');
-const modal = document.getElementById('modal');
-const btnModalClose = document.querySelector('.modal-content-close');
+const btnRegistration = document.getElementById("registration-btn");
+const modal = document.getElementById("modal");
+const btnModalClose = document.querySelector(".modal-content-close");
 
-const btnCreateUsualAcc = document.getElementById('rerular-btn');
-const btnCreateSavingsAcc = document.getElementById('savings-btn');
-const wrapperBtnsCreateAcc = document.querySelector('.modal-content .type-btn');
-const formCreateAcc = document.querySelector('.modal-content-form');
-const btnCreateAcc = document.getElementById('create-btn');
+const btnCreateUsualAcc = document.getElementById("rerular-btn");
+const btnCreateSavingsAcc = document.getElementById("savings-btn");
+const wrapperBtnsCreateAcc = document.querySelector(".modal-content .type-btn");
+const formCreateAcc = document.querySelector(".modal-content-form");
+const btnCreateAcc = document.getElementById("create-btn");
 
 function hideModal() {
-    modal.classList.remove('active')
-    wrapperBtnsCreateAcc.classList.add('active');
-    formCreateAcc.classList.remove('active');
-    btnCreateAcc.removeAttribute('data-type');
+  modal.classList.remove("active");
+  wrapperBtnsCreateAcc.classList.add("active");
+  formCreateAcc.classList.remove("active");
+  btnCreateAcc.value = "usual";
 }
 
-btnRegistration.addEventListener('click', () => {
-    modal.classList.add('active');
+btnRegistration.addEventListener("click", () => {
+  modal.classList.add("active");
 });
 
-btnModalClose.addEventListener('click', () => hideModal());
+btnModalClose.addEventListener("click", () => hideModal());
 
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        hideModal();
-    }
-})
-
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    hideModal();
+  }
+});
 
 function hideBtnsCreateAcc() {
-    wrapperBtnsCreateAcc.classList.remove('active');
+  wrapperBtnsCreateAcc.classList.remove("active");
 }
 
-wrapperBtnsCreateAcc.addEventListener('click', (e) => {
-    hideBtnsCreateAcc();
-    formCreateAcc.classList.add('active');
-    if (e.target === btnCreateSavingsAcc) {
-        btnCreateAcc.setAttribute('data-type', 'savings');
-    }
+wrapperBtnsCreateAcc.addEventListener("click", (e) => {
+  hideBtnsCreateAcc();
+  formCreateAcc.classList.add("active");
+  if (e.target === btnCreateSavingsAcc) {
+    btnCreateAcc.value = "savings";
+  }
 });
 
+formCreateAcc.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = new FormData(formCreateAcc, e.submitter); //просто так кнопка не передастся в данные
 
-//TODO: доделать создание аккаунта, отправить данные тут в обработчик аяксом
-btnCreateAcc.addEventListener('click', () => {
-
-})
+  fetch("service/create-acc.php", {
+    method: "POST",
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+      document.getElementById('message').innerHTML = `<h2>${result.message}</h2>`;
+    })
+    .catch((error) => {
+      console.error(error);
+      document.getElementById('message').innerHTML = `<h2>${result.message}</h2>`;
+    })
+    .finally(() => {
+        hideModal();
+    })
+});

@@ -5,14 +5,14 @@
             <button id="regular-btn">Обычный</button>
             <button id="savings-btn" class="savings-btn">Сберегательный</button>
         </div>
-        <form class="modal-content-form form" method="post" action="create-acc.php">
+        <form class="modal-content-form form" method="post">
             <label for="name">Имя владельца кошелька</label>
             <input type="text" name="name" placeholder="Имя" required>
             <label for="email">Почта</label>
             <input type="email" name="email" placeholder="Email" required>
             <label for="password">Пароль</label>
             <input type="password" name="password" placeholder="Пароль" required>
-            <button type="submit" data-type="usual" id="create-btn">Создать обычный кошелёк</button>
+            <button type="submit" name="type" value="usual" id="create-btn">Создать обычный кошелёк</button>
         </form>
     </div>
 </div>

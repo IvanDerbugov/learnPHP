@@ -19,7 +19,8 @@ if (file_exists($path)) {
 <body>
     <? include "./partial/header.html"; ?>
     <main class="container">
-        <? require_once __DIR__ . '/service/Accounts.php'; ?>
+        <div id="message"></div>
+        <!-- <? require_once __DIR__ . '/service/Accounts.php'; ?> -->
     </main>
 
     <? include "./partial/modal-crate-acc.html"; ?>

@@ -7,12 +7,17 @@ if (file_exists($path)) {
 
 class Account
 {
-    function __construct(public $owner, protected int $money = 0)
+    function __construct(public $owner, protected $email, protected $password, protected int $money = 0)
     {
     }
 
     public function printMoney () {
         return $this->money . '$';
+    }
+
+    public function Welcome() {
+        return "Добро пожаловать, {$this->owner}, в I-COIN желаем успешных торгов, роста капитала просто удачи. <br>
+        Начислили вам приветсвенный бонус 10$, теперь у вас {$this->printMoney()}";
     }
 
     public static $bankName = 'i-coin';

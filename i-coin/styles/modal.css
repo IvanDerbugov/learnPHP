@@ -47,7 +47,7 @@
 .modal-content-form button:hover {
   transform: scale(1.05);
 }
-.modal-content-form button[data-type=savings] {
+.modal-content-form button[value=savings] {
   background-color: rgba(13, 255, 0, 0.6470588235);
   color: #000;
 }
