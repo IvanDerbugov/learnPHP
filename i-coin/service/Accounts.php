@@ -7,8 +7,14 @@ if (file_exists($path)) {
 
 class Account
 {
+    static protected $typeAcc = 'обычный';
+    protected $id;
+    protected static $counter = 0;
     function __construct(public $owner, protected $email, protected $password, protected int $money = 0)
     {
+        $this->money += 10; //бонус
+        self::$counter++;
+        $this->id = self::$counter;
     }
 
     public function printMoney () {
@@ -17,7 +23,7 @@ class Account
 
     public function Welcome() {
         return "Добро пожаловать, {$this->owner}, в I-COIN желаем успешных торгов, роста капитала просто удачи. <br>
-        Начислили вам приветсвенный бонус 10$, теперь у вас {$this->printMoney()}";
+        Начислили вам приветсвенный бонус 10$, теперь у вас {$this->printMoney()}. Номер вашего аккаунта: {$this->id} Тип аккаунта: " . static::$typeAcc;
     }
 
     public static $bankName = 'i-coin';
@@ -77,6 +83,7 @@ class Account
 }
 
 class SavingsAccount extends Account {
+    static protected $typeAcc = 'сберегательный';
     function addPracent ($pracent) {
         $this->money *= 1 + $pracent/100;
         echo "На счёт {$this->owner} добавлено $pracent процент(а), на счету {$this->printMoney()}"  . "<br/>";

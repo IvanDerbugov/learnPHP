@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^service/db\.php$ - [F,L]
+</IfModule>
+
+DirectoryIndex index.php

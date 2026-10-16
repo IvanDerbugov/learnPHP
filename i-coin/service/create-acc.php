@@ -6,6 +6,7 @@ if (file_exists($path)) {
     echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
 
 require_once 'Accounts.php';
+require_once 'db.php';
 
 if (
     isset($_POST['name']) 
