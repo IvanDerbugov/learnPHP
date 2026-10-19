@@ -8,18 +8,18 @@ if (file_exists($path)) {
 require_once 'Accounts.php';
 require_once 'db.php';
 
+$name = $_POST['name'];
+$email = $_POST['email'];
 if (
-    isset($_POST['name']) 
-    && isset($_POST['email']) 
-    && isset($_POST['password']) 
+    isset($_POST['name'])
+    && isset($_POST['email'])
+    && isset($_POST['password'])
     && isset($_POST['type'])
-    && $_POST['name'] !== ''
-    && $_POST['email'] !== ''
+    && trim($name) !== ''
+    && trim($email) !== ''
     && $_POST['password'] !== ''
     && $_POST['type'] !== ''
 ) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
     $password = $_POST['password'];
     $typeAcc = $_POST['type'];
 
