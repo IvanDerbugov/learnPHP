@@ -8,26 +8,34 @@ if (file_exists($path)) {
 require_once 'Accounts.php';
 require_once 'db.php';
 
-$name = $_POST['name'];
-$email = $_POST['email'];
 if (
     isset($_POST['name'])
     && isset($_POST['email'])
     && isset($_POST['password'])
     && isset($_POST['type'])
-    && trim($name) !== ''
-    && trim($email) !== ''
+    && $_POST['name'] !== ''
+    && $_POST['email'] !== ''
     && $_POST['password'] !== ''
     && $_POST['type'] !== ''
 ) {
-    $password = $_POST['password'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    //TODO: сделать защиту от sql-иъекций
+    $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $typeAcc = $_POST['type'];
 
     if ($typeAcc === 'savings') {
-        $userId_1 = new SavingsAccount($name, $email, $password);
+        $isUsual = 0;
     } else if ($typeAcc === 'usual') {
-        $userId_1 = new Account($name, $email, $password);
+        $isUsual = 1;
+    } else {
+        echo json_encode([
+            'ok' => false,
+            'message' => 'неизвестный тип аккаунта'
+        ]);
     }
+
+
 
     echo json_encode([
         'ok' => true,
