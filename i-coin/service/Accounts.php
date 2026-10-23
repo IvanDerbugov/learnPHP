@@ -8,13 +8,10 @@ if (file_exists($path)) {
 class Account
 {
     static protected $typeAcc = 'обычный';
-    protected $id;
     protected static $counter = 0;
     function __construct(public $owner, protected $email, protected $password, protected int $money = 0)
     {
         $this->money += 10; //бонус
-        self::$counter++;
-        $this->id = self::$counter;
     }
 
     public function printMoney () {

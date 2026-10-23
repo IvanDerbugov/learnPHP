@@ -5,29 +5,29 @@ if (file_exists($path)) {
 } else
     echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
 
-require_once 'Accounts.php';
 require_once 'db.php';
 
+const welcomeBonus = 10;
+
 if (
-    isset($_POST['name'])
+    isset($_POST['owner'])
     && isset($_POST['email'])
     && isset($_POST['password'])
     && isset($_POST['type'])
-    && $_POST['name'] !== ''
+    && $_POST['owner'] !== ''
     && $_POST['email'] !== ''
     && $_POST['password'] !== ''
     && $_POST['type'] !== ''
 ) {
-    $name = trim($_POST['name']);
+    $owner = trim($_POST['owner']);
     $email = trim($_POST['email']);
-    //TODO: сделать защиту от sql-иъекций
     $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $typeAcc = $_POST['type'];
 
     if ($typeAcc === 'savings') {
-        $isUsual = 0;
+        $isUsualType = 0;
     } else if ($typeAcc === 'usual') {
-        $isUsual = 1;
+        $isUsualType = 1;
     } else {
         echo json_encode([
             'ok' => false,
@@ -35,18 +35,38 @@ if (
         ]);
     }
 
-
-
-    echo json_encode([
-        'ok' => true,
-        'name' => $name,
-        'email' => $email,
-        'type' => $typeAcc,
-        'message' => $userId_1->Welcome(),
-    ], JSON_UNESCAPED_UNICODE);
-} else {
-    echo json_encode([
-        'ok' => false,
-        'message' => 'недостаточно данных'
-    ]);
+    try {
+        $sql = 'INSERT INTO accounts (owner, email, password, money, isUsualType)
+            VALUES (:owner, :email, :password, :money, :isUsualType)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            //TODO разобраться с багом почему при создании акка неуспешно, ID под него всё равно резервируется и в последствии пропускается номер ID для следующего
+            'owner' => $owner,
+            'email' => $email,
+            'password' => $passwordHash,
+            'money' => welcomeBonus, //приветственныый бонус
+            'isUsualType' => $isUsualType,
+        ]);
+        echo json_encode([
+            'ok' => true,
+            'owner' => $owner,
+            'email' => $email,
+            'type' => $typeAcc,
+            //TODO сделать функцию с более информативным приветствием
+            'message' => 'создался',
+        ], JSON_UNESCAPED_UNICODE);
+    } catch (PDOException $error) {
+        //не уникальное значение почты
+        if ($error->errorInfo[1] === 1062) {
+            $message = 'Такая почта уже зарегана';
+        } else {
+            $message = 'Не удалось создать счёт';
+        }
+        echo json_encode([
+            'ok' => false,
+            'message' => $message
+            //опасно светить данные базы
+            // . $error->getMessage()
+        ]);
+    }
 }
