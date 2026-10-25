@@ -1,5 +1,5 @@
 header {
-    //headercontainer
+    //header.container
     &.container {
         padding-top: 5px;
         padding-bottom: 5px;
@@ -17,6 +17,21 @@ header {
         ul {
             display: flex;
             gap: 20px;
+        }
+    }
+
+    //header .buttons-sign
+    .buttons-sign{
+        &.hide {
+            display: none;
+        }
+    }
+    //header .user-btn
+    .user-btn{
+        display: none;
+
+        &.active {
+            display: block;
         }
     }
 }

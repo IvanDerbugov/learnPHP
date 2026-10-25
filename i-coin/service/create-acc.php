@@ -26,8 +26,10 @@ if (
 
     if ($typeAcc === 'savings') {
         $isUsualType = 0;
+        $nameTypeAcc = 'сберегающий';
     } else if ($typeAcc === 'usual') {
         $isUsualType = 1;
+        $nameTypeAcc = 'обычный';
     } else {
         echo json_encode([
             'ok' => false,
@@ -40,7 +42,6 @@ if (
             VALUES (:owner, :email, :password, :money, :isUsualType)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            //TODO разобраться с багом почему при создании акка неуспешно, ID под него всё равно резервируется и в последствии пропускается номер ID для следующего
             'owner' => $owner,
             'email' => $email,
             'password' => $passwordHash,
@@ -52,8 +53,9 @@ if (
             'owner' => $owner,
             'email' => $email,
             'type' => $typeAcc,
-            //TODO сделать функцию с более информативным приветствием
-            'message' => 'создался',
+            'id' => $id = $pdo->lastInsertId(),
+            'message' =>   "Добро пожаловать, $owner, в I-COIN. Желаем успешных торгов, роста капитала просто удачи. <br>
+                            Начислили вам приветсвенный бонус 10$, теперь у вас 10$. Тип аккаунта: $nameTypeAcc, ваш id: $id.",
         ], JSON_UNESCAPED_UNICODE);
     } catch (PDOException $error) {
         //не уникальное значение почты

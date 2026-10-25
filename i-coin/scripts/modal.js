@@ -41,7 +41,7 @@ wrapperBtnsCreateAcc.addEventListener("click", (e) => {
 
 formCreateAcc.addEventListener("submit", (e) => {
   e.preventDefault();
-  const data = new FormData(formCreateAcc, e.submitter); //просто так кнопка не передастся в данные
+  const data = new FormData(formCreateAcc, e.submitter); //просто так кнопка не передастся в данные, отправляем её вторым элементом
 
   fetch("service/create-acc.php", {
     method: "POST",
@@ -51,6 +51,8 @@ formCreateAcc.addEventListener("submit", (e) => {
     .then((result) => {
       console.log(result);
       document.getElementById('message').innerHTML = `<h2>${result.message}</h2>`;
+      document.getElementById('buttons-sign').classList.add('hide');
+      document.getElementById('user-btn').classList.add('active');
     })
     .catch((error) => {
       console.error(error);

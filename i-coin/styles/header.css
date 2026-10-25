@@ -10,4 +10,13 @@ header img {
 header nav ul {
   display: flex;
   gap: 20px;
+}
+header .buttons-sign.hide {
+  display: none;
+}
+header .user-btn {
+  display: none;
+}
+header .user-btn.active {
+  display: block;
 }/*# sourceMappingURL=header.css.map */
