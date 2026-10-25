@@ -15,7 +15,7 @@ function hideModal() {
   btnCreateAcc.value = "usual";
 }
 
-btnRegistration.addEventListener("click", () => {
+btnRegistration?.addEventListener("click", () => {
   modal.classList.add("active");
 });
 
@@ -41,6 +41,7 @@ wrapperBtnsCreateAcc.addEventListener("click", (e) => {
 
 formCreateAcc.addEventListener("submit", (e) => {
   e.preventDefault();
+  result.ok && location.reload;
   const data = new FormData(formCreateAcc, e.submitter); //просто так кнопка не передастся в данные, отправляем её вторым элементом
 
   fetch("service/create-acc.php", {
@@ -49,10 +50,7 @@ formCreateAcc.addEventListener("submit", (e) => {
   })
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
       document.getElementById('message').innerHTML = `<h2>${result.message}</h2>`;
-      document.getElementById('buttons-sign').classList.add('hide');
-      document.getElementById('user-btn').classList.add('active');
     })
     .catch((error) => {
       console.error(error);

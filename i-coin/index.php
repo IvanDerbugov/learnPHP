@@ -2,11 +2,19 @@
 $path = $_SERVER['DOCUMENT_ROOT'] . '/learn-php/error-config.php';
 if (file_exists($path)) {
     require_once $path;
-} else echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
+} else {
+    echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
+}
+
+session_start();
+// if (isset($_SESSION['id'], $_SESSION['owner'])) {
+//     $loggedIn = 1;
+// }
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,14 +24,17 @@ if (file_exists($path)) {
     <link rel="stylesheet" href="styles/modal.css">
     <link rel="icon" href="img/coin-cash.svg">
 </head>
+
 <body>
-    <? include "./partial/header.html"; ?>
+    <? include "./partial/header.php"; ?>
     <main class="container">
         <div id="message"></div>
         <!-- <? require_once __DIR__ . '/service/Accounts.php'; ?> -->
     </main>
 
     <? include "./partial/modal-crate-acc.html"; ?>
+    <script src="scripts/script.js"></script>
     <script src="scripts/modal.js"></script>
 </body>
+
 </html>

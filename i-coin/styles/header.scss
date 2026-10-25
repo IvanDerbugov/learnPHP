@@ -20,18 +20,41 @@ header {
         }
     }
 
-    //header .buttons-sign
-    .buttons-sign{
-        &.hide {
-            display: none;
-        }
-    }
-    //header .user-btn
-    .user-btn{
-        display: none;
+    //header .wrap-logged-in
+    .wrap-logged-in {
+        cursor: pointer;
+        position: relative;
 
-        &.active {
-            display: block;
+        //header .wrap-logged-in__user-modal
+        &__user-modal {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            flex-direction: column;
+            gap: 8px;
+            padding: 5px;
+            background-color: #fff;
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            z-index: 10;
+            cursor: default;
+
+            &.active {
+                display: flex;
+            }
+        }
+
+        .user-modal-close {
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.5);
+            font-size: 16px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
         }
     }
 }

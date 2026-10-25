@@ -11,12 +11,35 @@ header nav ul {
   display: flex;
   gap: 20px;
 }
-header .buttons-sign.hide {
-  display: none;
+header .wrap-logged-in {
+  cursor: pointer;
+  position: relative;
 }
-header .user-btn {
+header .wrap-logged-in__user-modal {
   display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  z-index: 10;
+  cursor: default;
 }
-header .user-btn.active {
-  display: block;
+header .wrap-logged-in__user-modal.active {
+  display: flex;
+}
+header .wrap-logged-in .user-modal-close {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.5);
+  font-size: 16px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
 }/*# sourceMappingURL=header.css.map */

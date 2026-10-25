@@ -7,6 +7,8 @@ if (file_exists($path)) {
 
 require_once 'db.php';
 
+session_start();
+
 const welcomeBonus = 10;
 
 if (
@@ -48,6 +50,8 @@ if (
             'money' => welcomeBonus, //приветственныый бонус
             'isUsualType' => $isUsualType,
         ]);
+        $_SESSION['id'] = $pdo->lastInsertId();
+        $_SESSION['owner'] = $owner;
         echo json_encode([
             'ok' => true,
             'owner' => $owner,
