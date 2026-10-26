@@ -7,9 +7,6 @@ if (file_exists($path)) {
 }
 
 session_start();
-// if (isset($_SESSION['id'], $_SESSION['owner'])) {
-//     $loggedIn = 1;
-// }
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +25,11 @@ session_start();
 <body>
     <? include "./partial/header.php"; ?>
     <main class="container">
-        <div id="message"></div>
+        <div id="message">
+            <? if (isset($_SESSION['message'])) { ?>
+                <h2><?= $_SESSION['message'] ?></h2>
+            <? } ?>
+        </div>
         <!-- <? require_once __DIR__ . '/service/Accounts.php'; ?> -->
     </main>
 

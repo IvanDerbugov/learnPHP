@@ -1,4 +1,5 @@
 const btnRegistration = document.getElementById("registration-btn");
+const btnLogin = document.getElementById("login-btn");
 const modal = document.getElementById("modal");
 const btnModalClose = document.querySelector(".modal-content-close");
 
@@ -6,17 +7,29 @@ const btnCreateUsualAcc = document.getElementById("rerular-btn");
 const btnCreateSavingsAcc = document.getElementById("savings-btn");
 const wrapperBtnsCreateAcc = document.querySelector(".modal-content .type-btn");
 const formCreateAcc = document.querySelector(".modal-content-form");
+const formLogin = document.getElementById("login-form");
 const btnCreateAcc = document.getElementById("create-btn");
 
 function hideModal() {
   modal.classList.remove("active");
   wrapperBtnsCreateAcc.classList.add("active");
   formCreateAcc.classList.remove("active");
+  formLogin.classList.remove("active");
   btnCreateAcc.value = "usual";
 }
 
 btnRegistration?.addEventListener("click", () => {
   modal.classList.add("active");
+  formLogin.classList.remove("active");
+  wrapperBtnsCreateAcc.classList.add("active");
+  formCreateAcc.classList.remove("active");
+});
+
+btnLogin?.addEventListener("click", () => {
+  modal.classList.add("active");
+  wrapperBtnsCreateAcc.classList.remove("active");
+  formCreateAcc.classList.remove("active");
+  formLogin.classList.add("active");
 });
 
 btnModalClose.addEventListener("click", () => hideModal());
@@ -39,9 +52,12 @@ wrapperBtnsCreateAcc.addEventListener("click", (e) => {
   }
 });
 
+formLogin.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
 formCreateAcc.addEventListener("submit", (e) => {
   e.preventDefault();
-  result.ok && location.reload;
   const data = new FormData(formCreateAcc, e.submitter); //просто так кнопка не передастся в данные, отправляем её вторым элементом
 
   fetch("service/create-acc.php", {
@@ -50,6 +66,10 @@ formCreateAcc.addEventListener("submit", (e) => {
   })
     .then((response) => response.json())
     .then((result) => {
+      if (result.ok) {
+        location.reload();
+        return;
+      }
       document.getElementById('message').innerHTML = `<h2>${result.message}</h2>`;
     })
     .catch((error) => {
@@ -57,6 +77,6 @@ formCreateAcc.addEventListener("submit", (e) => {
       document.getElementById('message').innerHTML = `<h2>${result.message}</h2>`;
     })
     .finally(() => {
-        hideModal();
+      hideModal();
     })
 });

@@ -21,12 +21,12 @@
                 <div class="wrap-logged-in__user-modal">
                     <button type="button" class="user-modal-close">X</button>
                     <p>Привет, <?= $_SESSION['owner'] ?></p>
-                    <button type="button" id="sign-out">Выйти</button>
-                </div>
+                    <a href="service/logout.php" id="sign-out">Выйти</a>
+                    </div>
             </div>
         <? } else { ?>
             <div id="buttons-sign" class="flex buttons-sign">
-                <button>Войти</button>
+                <button type="button" id="login-btn">Войти</button>
                 <button id="registration-btn">Регистрация</button>
             </div>
         <? } ?>

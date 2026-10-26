@@ -52,14 +52,11 @@ if (
         ]);
         $_SESSION['id'] = $pdo->lastInsertId();
         $_SESSION['owner'] = $owner;
+        $id = $id = $pdo->lastInsertId();
+        $_SESSION['message'] = "Добро пожаловать, $owner, в I-COIN. Желаем успешных торгов, роста капитала просто удачи. <br>
+                            Начислили вам приветсвенный бонус 10$, теперь у вас 10$. Тип аккаунта: $nameTypeAcc, ваш id: $id.";
         echo json_encode([
             'ok' => true,
-            'owner' => $owner,
-            'email' => $email,
-            'type' => $typeAcc,
-            'id' => $id = $pdo->lastInsertId(),
-            'message' =>   "Добро пожаловать, $owner, в I-COIN. Желаем успешных торгов, роста капитала просто удачи. <br>
-                            Начислили вам приветсвенный бонус 10$, теперь у вас 10$. Тип аккаунта: $nameTypeAcc, ваш id: $id.",
         ], JSON_UNESCAPED_UNICODE);
     } catch (PDOException $error) {
         //не уникальное значение почты
@@ -71,8 +68,6 @@ if (
         echo json_encode([
             'ok' => false,
             'message' => $message
-            //опасно светить данные базы
-            // . $error->getMessage()
         ]);
     }
 }
