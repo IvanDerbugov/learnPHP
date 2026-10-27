@@ -12,10 +12,10 @@ session_start();
 const welcomeBonus = 10;
 
 if (
-    isset($_POST['owner'])
-    && isset($_POST['email'])
-    && isset($_POST['password'])
-    && isset($_POST['type'])
+    isset($_POST['owner'],
+    $_POST['email'],
+    $_POST['password'],
+    $_POST['type'])
     && $_POST['owner'] !== ''
     && $_POST['email'] !== ''
     && $_POST['password'] !== ''

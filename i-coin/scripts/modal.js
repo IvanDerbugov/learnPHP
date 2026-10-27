@@ -9,6 +9,7 @@ const wrapperBtnsCreateAcc = document.querySelector(".modal-content .type-btn");
 const formCreateAcc = document.querySelector(".modal-content-form");
 const formLogin = document.getElementById("login-form");
 const btnCreateAcc = document.getElementById("create-btn");
+const loginFormMessage = document.getElementById("login-form-message");
 
 function hideModal() {
   modal.classList.remove("active");
@@ -54,6 +55,23 @@ wrapperBtnsCreateAcc.addEventListener("click", (e) => {
 
 formLogin.addEventListener("submit", (e) => {
   e.preventDefault();
+  const data = new FormData(formLogin);
+
+  fetch("service/sign-in.php", {
+    method: "POST",
+    body: data
+  })
+  .then((response) => response.json())
+  .then((result) => {
+    if (result.ok) {
+      loginFormMessage.textContent = `${result.message}`;
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+      return;
+    }
+    loginFormMessage.textContent = `${result.message}`;
+  })
 });
 
 formCreateAcc.addEventListener("submit", (e) => {

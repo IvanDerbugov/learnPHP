@@ -33,7 +33,7 @@ session_start();
         <!-- <? require_once __DIR__ . '/service/Accounts.php'; ?> -->
     </main>
 
-    <? include "./partial/modal-crate-acc.html"; ?>
+    <? include "./partial/modals-acc.html"; ?>
     <script src="scripts/script.js"></script>
     <script src="scripts/modal.js"></script>
 </body>
