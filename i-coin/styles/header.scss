@@ -39,6 +39,7 @@ header {
             border-radius: 10px;
             z-index: 10;
             cursor: default;
+            width: 100px;
 
             &.active {
                 display: flex;
@@ -55,6 +56,14 @@ header {
             width: 22px;
             height: 22px;
             cursor: pointer;
+        }
+
+        //header .sign-out
+        .sign-out {
+            padding: 3px;
+            border-radius: 3px;
+            border: 1px solid red;
+            text-align: center;
         }
     }
 }

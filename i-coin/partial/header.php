@@ -21,8 +21,9 @@
                 <div class="wrap-logged-in__user-modal">
                     <button type="button" class="user-modal-close">X</button>
                     <p>Привет, <?= $_SESSION['owner'] ?></p>
-                    <a href="service/logout.php" id="sign-out">Выйти</a>
-                    </div>
+                    <p>Баланс: <?= $money?>$</p>
+                    <a href="service/logout.php" id="sign-out" class="sign-out">Выйти</a>
+                </div>
             </div>
         <? } else { ?>
             <div id="buttons-sign" class="flex buttons-sign">

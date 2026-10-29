@@ -28,6 +28,7 @@ header .wrap-logged-in__user-modal {
   border-radius: 10px;
   z-index: 10;
   cursor: default;
+  width: 100px;
 }
 header .wrap-logged-in__user-modal.active {
   display: flex;
@@ -42,4 +43,10 @@ header .wrap-logged-in .user-modal-close {
   width: 22px;
   height: 22px;
   cursor: pointer;
+}
+header .wrap-logged-in .sign-out {
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid red;
+  text-align: center;
 }/*# sourceMappingURL=header.css.map */

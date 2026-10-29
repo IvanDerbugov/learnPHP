@@ -5,8 +5,14 @@ if (file_exists($path)) {
 } else {
     echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
 }
-
 session_start();
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/getBalanceFromId.php';
+if (isset($_SESSION['id'])) {
+    $money = getBalance($pdo, (int) $_SESSION['id']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +34,9 @@ session_start();
         <div id="message">
             <? if (isset($_SESSION['message'])) { ?>
                 <h2><?= $_SESSION['message'] ?></h2>
+                <? $_SESSION['message'] = '' ?>
             <? } ?>
         </div>
-        <!-- <? require_once __DIR__ . '/service/Accounts.php'; ?> -->
     </main>
 
     <? include "./partial/modals-acc.html"; ?>
