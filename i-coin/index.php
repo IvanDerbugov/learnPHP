@@ -35,13 +35,15 @@ if (isset($_SESSION['id'])) {
             <? if (isset($_SESSION['message'])) { ?>
                 <h2><?= $_SESSION['message'] ?></h2>
                 <? $_SESSION['message'] = '' ?>
-            <? } ?>
+            <? } else {?>
+                <h2>Добро пожаловать, <?echo $_SESSION['owner']?>!</h2>
+            <?}?>
         </div>
     </main>
 
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>
-    <script src="scripts/script.js"></script>
-    <script src="scripts/modal.js"></script>
+    <script src="/learn-php/i-coin/scripts/script.js"></script>
+    <script src="/learn-php/i-coin/scripts/modal.js"></script>
 </body>
 
 </html>

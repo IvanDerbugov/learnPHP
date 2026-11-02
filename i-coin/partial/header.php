@@ -24,7 +24,7 @@
                     <button type="button" class="user-modal-close">X</button>
                     <p>Привет, <?= $_SESSION['owner'] ?></p>
                     <p>Баланс: <?= $money ?>$</p>
-                    <a href="service/logout.php" id="sign-out" class="sign-out">Выйти</a>
+                    <a href="/learn-php/i-coin/service/logout.php" id="sign-out" class="sign-out">Выйти</a>
                 </div>
             </div>
         <? } else { ?>

@@ -6,7 +6,7 @@ if (file_exists($path)) {
     echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
 }
 
-require_once 'db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
 session_start();
 
 if (

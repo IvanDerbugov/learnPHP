@@ -25,24 +25,39 @@ if (isset($_SESSION['id'])) {
     <link rel="stylesheet" href="/learn-php/i-coin/styles/base.css">
     <link rel="stylesheet" href="/learn-php/i-coin/styles/header.css">
     <link rel="stylesheet" href="/learn-php/i-coin/styles/modal.css">
+    <link rel="stylesheet" href="/learn-php/i-coin/styles/users.css">
     <link rel="icon" href="/learn-php/i-coin/img/coin-cash.svg">
 </head>
 
 <body>
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/header.php"; ?>
-    <main>
+    <main class="container">
         <h2>Пользователи i-coin:</h2>
         <?
-        $sql = 'SELECT owner, money
+        if (isset($_SESSION['id'])) {
+            $sql = 'SELECT owner, money
                 FROM accounts';
-        $stmt = $pdo->query($sql)->fetchAll();
-        echo 'пользователи' . "<br/>";
-        print_r($stmt);
-        foreach($stmt as $user) {
-            
-        }
+            $stmt = $pdo->query($sql)->fetchAll();
+            // print_r($stmt);
+            echo "<div class='table-users'>";
+            echo "<div class='table-users_row table-users_head'>
+                <div class='table-users_row_user'>Имя</div>
+                <div class='table-users_row_user'>Баланс</div>
+              </div>";
+            foreach ($stmt as $user) {
+                echo "<div class='table-users_row'>
+                    <div class='table-users_row_user'>" . $user['owner'] . "</div>" .
+                    "<div class='table-users_row_user'>" . $user['money'] . '$' . "</div>" .
+                    "</div>";
+            }
+            echo "</div>";
+        } else echo "Авторизуйтесь или зарегестрируйтесь для доступа"
         ?>
     </main>
+
+    <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>
+    <script src="/learn-php/i-coin/scripts/script.js"></script>
+    <script src="/learn-php/i-coin/scripts/modal.js"></script>
 </body>
 
 </html>

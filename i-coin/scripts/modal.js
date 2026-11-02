@@ -57,7 +57,7 @@ formLogin.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(formLogin);
 
-  fetch("service/sign-in.php", {
+  fetch("/learn-php/i-coin/service/sign-in.php", {
     method: "POST",
     body: data
   })
@@ -78,7 +78,7 @@ formCreateAcc.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(formCreateAcc, e.submitter); //просто так кнопка не передастся в данные, отправляем её вторым элементом
 
-  fetch("service/create-acc.php", {
+  fetch("/learn-php/i-coin/service/create-acc.php", {
     method: "POST",
     body: data,
   })
