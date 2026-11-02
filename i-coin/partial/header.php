@@ -1,8 +1,10 @@
 <header class="container flex">
-    <img src="img/coin-cash.svg" alt="монета">
+    <a href="/learn-php/i-coin">
+        <img src="/learn-php/i-coin/img/coin-cash.svg" alt="монета">
+    </a>
     <nav>
         <ul>
-            <li><a href="#">Главная</a></li>
+            <li><a href="/learn-php/i-coin/pages/users.php">Юзеры</a></li>
             <li><a href="#">О проекте</a></li>
             <li><a href="#">Контакты</a></li>
         </ul>
@@ -21,7 +23,7 @@
                 <div class="wrap-logged-in__user-modal">
                     <button type="button" class="user-modal-close">X</button>
                     <p>Привет, <?= $_SESSION['owner'] ?></p>
-                    <p>Баланс: <?= $money?>$</p>
+                    <p>Баланс: <?= $money ?>$</p>
                     <a href="service/logout.php" id="sign-out" class="sign-out">Выйти</a>
                 </div>
             </div>

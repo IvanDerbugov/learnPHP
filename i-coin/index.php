@@ -22,14 +22,14 @@ if (isset($_SESSION['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>i-coin</title>
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/modal.css">
-    <link rel="icon" href="img/coin-cash.svg">
+    <link rel="stylesheet" href="/learn-php/i-coin/styles/base.css">
+    <link rel="stylesheet" href="/learn-php/i-coin/styles/header.css">
+    <link rel="stylesheet" href="/learn-php/i-coin/styles/modal.css">
+    <link rel="icon" href="/learn-php/i-coin/img/coin-cash.svg">
 </head>
 
 <body>
-    <? include "./partial/header.php"; ?>
+    <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/header.php"; ?>
     <main class="container">
         <div id="message">
             <? if (isset($_SESSION['message'])) { ?>
@@ -39,7 +39,7 @@ if (isset($_SESSION['id'])) {
         </div>
     </main>
 
-    <? include "./partial/modals-acc.html"; ?>
+    <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>
     <script src="scripts/script.js"></script>
     <script src="scripts/modal.js"></script>
 </body>
