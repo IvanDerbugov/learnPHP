@@ -12,7 +12,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/getBalanceFr
 if (isset($_SESSION['id'])) {
     $money = getBalance($pdo, (int) $_SESSION['id']);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -35,8 +34,8 @@ if (isset($_SESSION['id'])) {
             <? if (isset($_SESSION['message'])) { ?>
                 <h2><?= $_SESSION['message'] ?></h2>
                 <? $_SESSION['message'] = '' ?>
-            <? } else {?>
-                <h2>Добро пожаловать, <?echo $_SESSION['owner']?>!</h2>
+            <? } else if (isset($_SESSION['owner'])) {?>
+                <h2>Добро пожаловать, <?= $_SESSION['owner']?>!</h2>
             <?}?>
         </div>
     </main>

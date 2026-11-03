@@ -4,5 +4,6 @@ CREATE TABLE accounts (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     money INT NOT NULL DEFAULT 0,
-    isUsualType TINYINT NOT NULL CHECK (isUsualType IN (0, 1))
+    isUsualType TINYINT NOT NULL CHECK (isUsualType IN (0, 1)),
+    displayBalance TINYINT NOT NULL DEFAULT 0 CHECK (displayBalance IN (0, 1))
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8mb4;

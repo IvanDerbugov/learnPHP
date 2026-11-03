@@ -12,10 +12,12 @@ session_start();
 const welcomeBonus = 10;
 
 if (
-    isset($_POST['owner'],
+    isset(
+    $_POST['owner'],
     $_POST['email'],
     $_POST['password'],
-    $_POST['type'])
+    $_POST['type']
+    )
     && $_POST['owner'] !== ''
     && $_POST['email'] !== ''
     && $_POST['password'] !== ''
@@ -25,6 +27,11 @@ if (
     $email = trim($_POST['email']);
     $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $typeAcc = $_POST['type'];
+    if (isset($_POST['displayBalance'])) {//а если не отмечали - то и не будет его
+        $displayBalance = 1;
+    } else {
+        $displayBalance = 0;
+    }
 
     if ($typeAcc === 'savings') {
         $isUsualType = 0;
@@ -40,8 +47,8 @@ if (
     }
 
     try {
-        $sql = 'INSERT INTO accounts (owner, email, password, money, isUsualType)
-            VALUES (:owner, :email, :password, :money, :isUsualType)';
+        $sql = 'INSERT INTO accounts (owner, email, password, money, isUsualType, displayBalance)
+            VALUES (:owner, :email, :password, :money, :isUsualType, :displayBalance)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'owner' => $owner,
@@ -49,12 +56,16 @@ if (
             'password' => $passwordHash,
             'money' => welcomeBonus, //приветственныый бонус
             'isUsualType' => $isUsualType,
+            'displayBalance' => $displayBalance
         ]);
         $_SESSION['id'] = $pdo->lastInsertId();
         $_SESSION['owner'] = $owner;
         $id = $id = $pdo->lastInsertId();
+        if ($displayBalance) {
+            $messageDisplayBalance = 'виден всем пользователям';
+        } else $messageDisplayBalance = 'не виден никому кроме вас';
         $_SESSION['message'] = "Добро пожаловать, $owner, в I-COIN. Желаем успешных торгов, роста капитала просто удачи. <br>
-                            Начислили вам приветсвенный бонус 10$, теперь у вас 10$. Тип аккаунта: $nameTypeAcc, ваш id: $id.";
+                            Начислили вам приветсвенный бонус 10$, теперь у вас 10$. Тип аккаунта: $nameTypeAcc, ваш id: $id, ваш баланс $messageDisplayBalance.";
         echo json_encode([
             'ok' => true,
         ], JSON_UNESCAPED_UNICODE);

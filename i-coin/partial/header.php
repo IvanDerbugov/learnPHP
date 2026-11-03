@@ -5,7 +5,7 @@
     <nav>
         <ul>
             <li><a href="/learn-php/i-coin/pages/users.php">Юзеры</a></li>
-            <li><a href="#">О проекте</a></li>
+            <li><a href="/learn-php/i-coin/pages/settings.php">Настройки</a></li>
             <li><a href="#">Контакты</a></li>
         </ul>
     </nav>
