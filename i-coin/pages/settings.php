@@ -32,10 +32,12 @@ if (isset($_SESSION['id'])) {
 <body>
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/header.php"; ?>
     <main class="container">
-        <div id="wrapDisplayBalance">
-            <input type="checkbox" id="displayBalance" <?= $displayBalance ? 'checked' : '' ?>>
-            <label for="displayBalance">Показывать баланс?</label>
-        </div>
+        <? if (isset($_SESSION['id'])) { ?>
+            <div id="wrapDisplayBalance">
+                <input type="checkbox" id="displayBalance" <?= $displayBalance ? 'checked' : '' ?>>
+                <label for="displayBalance">Показывать баланс?</label>
+            </div>
+        <? } ?>
     </main>
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>
     <script src="/learn-php/i-coin/scripts/script.js"></script>

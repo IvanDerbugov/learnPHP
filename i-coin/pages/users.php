@@ -35,24 +35,34 @@ if (isset($_SESSION['id'])) {
         <h2>Пользователи i-coin:</h2>
         <?
         if (isset($_SESSION['id'])) {
-            $sql = 'SELECT owner, money
+            $sql = 'SELECT owner, money, displayBalance
                 FROM accounts';
             $stmt = $pdo->query($sql)->fetchAll();
             // print_r($stmt);
-            echo "<div class='table-users'>";
-            echo "<div class='table-users_row table-users_head'>
-                <div class='table-users_row_user'>Имя</div>
-                <div class='table-users_row_user'>Баланс</div>
-              </div>";
-            foreach ($stmt as $user) {
-                echo "<div class='table-users_row'>
-                    <div class='table-users_row_user'>" . $user['owner'] . "</div>" .
-                    "<div class='table-users_row_user'>" . $user['money'] . '$' . "</div>" .
-                    "</div>";
-            }
-            echo "</div>";
-        } else echo "Авторизуйтесь или зарегестрируйтесь для доступа"
-        ?>
+            ?>
+            <div class='table-users'>
+                <div class='table-users_row table-users_head'>
+                    <div class='table-users_row_user'>Имя</div>
+                    <div class='table-users_row_user'>Баланс</div>
+                </div>
+                <? foreach ($stmt as $user) { ?>
+                    <div class='table-users_row' <?= $user['owner'] === $_SESSION['owner'] ? "style='background: #c0f2c6;'" : '' ?>>
+                        <div class='table-users_row_user'>" .
+                            $user['owner'] . "</div>" .
+                        "<div class='table-users_row_user'>";
+                            if (!!$user['displayBalance'] || $user['owner'] === $_SESSION['owner']) {
+                            echo $user['money'] . '$';
+                            } else {
+                            echo 'скрыто';
+                            }
+                            echo "</div>" .
+                        "
+                    </div>";
+                <? } ?>
+            </div>
+        <? } else {
+            echo "Авторизуйтесь или зарегестрируйтесь для доступа";
+        } ?>
     </main>
 
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>
