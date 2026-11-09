@@ -22,7 +22,7 @@
 
                 <div class="wrap-logged-in__user-modal">
                     <button type="button" class="user-modal-close">X</button>
-                    <p>Привет, <?= $_SESSION['owner'] ?></p>
+                    <p>Привет, <?= htmlspecialchars($_SESSION['owner'], ENT_QUOTES, 'UTF-8') ?></p>
                     <p>Баланс: <?= $money ?>$</p>
                     <a href="/learn-php/i-coin/service/logout.php" id="sign-out" class="sign-out">Выйти</a>
                 </div>
