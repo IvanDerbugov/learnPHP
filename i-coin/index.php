@@ -8,7 +8,8 @@ if (file_exists($path)) {
 session_start();
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/getBalanceFromId.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getBalanceFromId.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getUsers.php';
 if (isset($_SESSION['id'])) {
     $money = getBalance($pdo, (int) $_SESSION['id']);
 }
@@ -34,15 +35,37 @@ if (isset($_SESSION['id'])) {
             <? if (isset($_SESSION['message'])) { ?>
                 <h2><?= $_SESSION['message'] ?></h2>
                 <? $_SESSION['message'] = '' ?>
-            <? } else if (isset($_SESSION['owner'])) {?>
-                <h2>Добро пожаловать, <?= $_SESSION['owner']?>!</h2>
-            <?}?>
+            <? }
+            if (isset($_SESSION['owner'])) { ?>
+                <h2>Добро пожаловать, <?= $_SESSION['owner'] ?>!</h2>
+            <? } ?>
         </div>
+
+        <? if ($_SESSION['id']) { ?>
+            <br>
+            <h3>Отправить деньги</h3>
+            <form method="post" id="form-send-money">
+                <div class="flex" style="justify-content: start;">
+                    <p>Кому:</p>
+                    <select>
+                        <? $users = getUsers($pdo);
+                        foreach ($users as $user) { ?>
+                            <option><?= "{$user['owner']} - {$user['id']}" ?></option>
+                        <? } ?>
+                    </select>
+                </div>
+                <div class="flex" style="justify-content: start;">
+                    <label for="sum">Сколько $:</label>
+                    <input type="number" placeholder="3" value="5">
+                </div>
+                <button type="submit" style="color: red">Отправить</button>
+            </form>
+        <? } ?>
     </main>
 
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>
     <script src="/learn-php/i-coin/scripts/script.js"></script>
     <script src="/learn-php/i-coin/scripts/modal.js"></script>
+    <script src="/learn-php/i-coin/scripts/sendMoney.js"></script>
 </body>
-
 </html>

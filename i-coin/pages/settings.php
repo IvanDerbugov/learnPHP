@@ -8,7 +8,7 @@ if (file_exists($path)) {
 session_start();
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/getBalanceFromId.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getBalanceFromId.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/displayBalance.php';
 if (isset($_SESSION['id'])) {
     $money = getBalance($pdo, (int) $_SESSION['id']);
