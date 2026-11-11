@@ -47,16 +47,19 @@ if (isset($_SESSION['id'])) {
             <form method="post" id="form-send-money">
                 <div class="flex" style="justify-content: start;">
                     <p>Кому:</p>
-                    <select>
+                    <select name="recipientTransferId">
                         <? $users = getUsers($pdo);
-                        foreach ($users as $user) { ?>
-                            <option><?= "{$user['owner']} - {$user['id']}" ?></option>
+                        foreach ($users as $user) {
+                            if ($_SESSION['id'] == $user['id']) {
+                                continue;
+                            } ?>
+                            <?= "<option value='{$user['id']}'> {$user['owner']} - {$user['id']} </option>" ?>
                         <? } ?>
                     </select>
                 </div>
                 <div class="flex" style="justify-content: start;">
                     <label for="sum">Сколько $:</label>
-                    <input type="number" placeholder="3" value="5">
+                    <input type="number" name="sumTransfer" placeholder="3" value="5">
                 </div>
                 <button type="submit" style="color: red">Отправить</button>
             </form>
@@ -68,4 +71,5 @@ if (isset($_SESSION['id'])) {
     <script src="/learn-php/i-coin/scripts/modal.js"></script>
     <script src="/learn-php/i-coin/scripts/sendMoney.js"></script>
 </body>
+
 </html>
