@@ -35,7 +35,7 @@ if (isset($_SESSION['id'])) {
         <? if (isset($_SESSION['id'])) { ?>
             <div id="wrapDisplayBalance">
                 <input type="checkbox" id="displayBalance" <?= $displayBalance ? 'checked' : '' ?>>
-                <label for="displayBalance">Показывать баланс?</label>
+                <label for="displayBalance">Показывать свой баланс всем?</label>
             </div>
         <? } ?>
     </main>

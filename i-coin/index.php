@@ -41,7 +41,7 @@ if (isset($_SESSION['id'])) {
             <? } ?>
         </div>
 
-        <? if ($_SESSION['id']) { ?>
+        <? if (isset($_SESSION['id'])) { ?>
             <br>
             <h3>Отправить деньги</h3>
             <form method="post" id="form-send-money">
