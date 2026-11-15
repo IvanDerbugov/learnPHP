@@ -18,21 +18,44 @@ if (
     && $_POST['recipientTransferId'] !== ''
     && $_POST['sumTransfer'] !== ''
 ) {
-    $recipientTransferId = strip_tags($_POST['recipientTransferId']);
+    $recipientTransferId = filter_var(
+        strip_tags($_POST['recipientTransferId']),
+        FILTER_VALIDATE_INT
+    );
     $sumTransfer = filter_var(
         strip_tags($_POST['sumTransfer']),
         FILTER_VALIDATE_INT
     );
 }
-if ($sumTransfer === false || $sumTransfer <= 0) {
+if (
+    $sumTransfer === false || $sumTransfer <= 0
+    || $recipientTransferId === false
+) {
     echo json_encode(['ok' => 'false', 'message' => 'сумма отправки - херь']);
     exit;
-};
+}
+;
 if ($money >= $sumTransfer) {
-    // $sql = 'UPDATE accounts
-    //         SET money =
-    //         WHERE id = :id';
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute(['id' => $_SESSION['id']])
-} else echo json_encode(['ok' => false]);
+    try {
+        $pdo->beginTransaction();
+        $sql = 'UPDATE accounts
+                SET money = money - :sumTransfer
+                WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['sumTransfer' => $sumTransfer, 'id' => $_SESSION['id']]);
+
+        $sql = 'UPDATE accounts
+                SET money = money + :sumTransfer
+                WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['sumTransfer' => $sumTransfer, 'id' => $recipientTransferId]);
+        $pdo->commit();
+        echo json_encode(['ok' => true]);
+    } catch (PDOException $error) {
+        $pdo->rollBack();
+        echo json_encode(['ok' => false]);
+    }
+} else {
+    echo json_encode(['ok' => false]);
+}
 ?>
