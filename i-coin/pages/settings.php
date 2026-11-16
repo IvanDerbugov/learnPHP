@@ -10,6 +10,7 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getBalanceFromId.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/displayBalance.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getUsers.php';
 if (isset($_SESSION['id'])) {
     $money = getBalance($pdo, (int) $_SESSION['id']);
     $displayBalance = displayBalance($pdo, (int) $_SESSION['id']);
@@ -36,6 +37,22 @@ if (isset($_SESSION['id'])) {
             <div id="wrapDisplayBalance">
                 <input type="checkbox" id="displayBalance" <?= $displayBalance ? 'checked' : '' ?>>
                 <label for="displayBalance">Показывать свой баланс всем?</label>
+            </div>
+            <div id="delegate">
+                <p>Имеют доступ к вашим средствам:</p>
+                <? $users = getUsers($pdo);
+                foreach ($users as $user) {
+                    if ($_SESSION['id'] == $user['id']) {
+                        continue;
+                    }?>
+                    <div class="flex" style="justify-content: start">
+                        <!-- TODO метод сюда получения данныех из базы и Js чтобы отправлялось в базу при отметки -->
+                        <input name="user-<?=$user['id']?>" type="checkbox">
+                        <label for="user-<?=$user['id']?>">
+                            <?= $user['owner'] . '-' . $user['id']?>
+                        </label>
+                    </div>
+                <?} ?>
             </div>
         <? } ?>
     </main>

@@ -1,0 +1,18 @@
+CREATE TABLE accounts (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    owner VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    money INT NOT NULL DEFAULT 0,
+    isUsualType TINYINT NOT NULL CHECK (isUsualType IN (0, 1)),
+    displayBalance TINYINT NOT NULL DEFAULT 0 CHECK (displayBalance IN (0, 1))
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8mb4;
+
+CREATE TABLE delegate (
+    owner_id INT UNSIGNED NOT NULL,
+    delegate_id INT UNSIGNED NOT NULL,
+    PRIMARY KEY (owner_id, delegate_id),
+    CHECK (owner_id <> delegate_id),
+    FOREIGN KEY (owner_id) REFERENCES accounts(id) ON DELETE CASCADE,
+    FOREIGN KEY (delegate_id) REFERENCES accounts(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8mb4;
