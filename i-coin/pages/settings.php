@@ -46,9 +46,8 @@ if (isset($_SESSION['id'])) {
                         continue;
                     }?>
                     <div class="flex" style="justify-content: start">
-                        <!-- TODO метод сюда получения данныех из базы и Js чтобы отправлялось в базу при отметки -->
-                        <input name="user-<?=$user['id']?>" type="checkbox">
-                        <label for="user-<?=$user['id']?>">
+                        <input name="<?=$user['id']?>" id="<?=$user['id']?>" type="checkbox">
+                        <label for="<?=$user['id']?>">
                             <?= $user['owner'] . '-' . $user['id']?>
                         </label>
                     </div>
