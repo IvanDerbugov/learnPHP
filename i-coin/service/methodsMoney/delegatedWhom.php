@@ -1,5 +1,5 @@
 <?
-function delegatedWhom (PDO $pdo, int $id) {
+function delegatedWhom (PDO $pdo) {
     $path = $_SERVER['DOCUMENT_ROOT'] . '/learn-php/error-config.php';
     if (file_exists($path)) {
         require_once $path;
@@ -12,5 +12,5 @@ function delegatedWhom (PDO $pdo, int $id) {
             WHERE owner_id = :id';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['id' => (int) $_SESSION['id']]);
-    return $usersDelegate = $stmt->fetchAll();
+    return $usersDelegate = $stmt->fetchAll(PDO::FETCH_COLUMN);
 }

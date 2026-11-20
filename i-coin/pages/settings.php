@@ -11,6 +11,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getBalanceFromId.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/displayBalance.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getUsers.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/delegatedWhom.php';
 if (isset($_SESSION['id'])) {
     $money = getBalance($pdo, (int) $_SESSION['id']);
     $displayBalance = displayBalance($pdo, (int) $_SESSION['id']);
@@ -39,7 +40,7 @@ if (isset($_SESSION['id'])) {
                 <label for="displayBalance">Показывать свой баланс всем?</label>
             </div>
             <div id="delegate">
-                <p>Имеют доступ к вашим средствам:</p>
+                <h2>Имеют доступ к вашим средствам:</h2>
                 <? $users = getUsers($pdo);
                 $usersDelegate = delegatedWhom($pdo);
                 foreach ($users as $user) {
@@ -47,12 +48,12 @@ if (isset($_SESSION['id'])) {
                         continue;
                     }?>
                     <div class="flex" style="justify-content: start">
-                        <input name="<?=$user['id']?>" id="<?=$user['id']?>" type="checkbox">
+                        <input name="<?=$user['id']?>" id="<?=$user['id'] ?>" <?= in_array($user['id'], $usersDelegate) ? 'checked' : ''?> type="checkbox">
                         <label for="<?=$user['id']?>">
                             <?= $user['owner'] . '-' . $user['id']?>
                         </label>
                     </div>
-                <?} ?>
+                <?}; ?>
             </div>
         <? } ?>
     </main>
