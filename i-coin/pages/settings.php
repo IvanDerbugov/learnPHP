@@ -41,6 +41,7 @@ if (isset($_SESSION['id'])) {
             <div id="delegate">
                 <p>Имеют доступ к вашим средствам:</p>
                 <? $users = getUsers($pdo);
+                $usersDelegate = delegatedWhom($pdo);
                 foreach ($users as $user) {
                     if ($_SESSION['id'] == $user['id']) {
                         continue;
