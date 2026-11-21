@@ -10,6 +10,7 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getBalanceFromId.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/getUsers.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/methodsMoney/delegatedWho.php';
 if (isset($_SESSION['id'])) {
     $money = getBalance($pdo, (int) $_SESSION['id']);
 }
@@ -64,6 +65,18 @@ if (isset($_SESSION['id'])) {
                 <button type="submit" style="color: red">Отправить</button>
             </form>
         <? } ?>
+        <br><br>
+        <h3>Получить деньги</h3>
+        <form id="getMoney">
+            <p>От:</p>
+            <? $haveAccessTo = delegatedWho($pdo);
+            print_r($haveAccessTo) ?>
+            <!-- <select name="" id="">
+                <? foreach ($haveAccessTo as $user) {
+                    echo "<option value='{$user['id']}'>имя кто доступ дал сюда</option>";
+                }?>
+            </select>  -->
+        </form>
     </main>
 
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>

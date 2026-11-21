@@ -7,7 +7,7 @@ if (file_exists($path)) {
 }
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/learn-php/i-coin/service/db.php';
-// TODO если уже записано - менять не надо ничего. если чекбокс снимаем - надо удалять запись
+
 if (isset($_POST['name']) && $_POST['name'] !== '') {
     $delegateId = strip_tags($_POST['name']);
     try {
