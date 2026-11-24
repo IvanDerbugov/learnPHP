@@ -66,16 +66,23 @@ if (isset($_SESSION['id'])) {
             </form>
         <? } ?>
         <br><br>
+
         <h3>Получить деньги</h3>
         <form id="getMoney">
-            <p>От:</p>
-            <? $haveAccessTo = delegatedWho($pdo);
-            print_r($haveAccessTo) ?>
-            <!-- <select name="" id="">
-                <? foreach ($haveAccessTo as $user) {
-                    echo "<option value='{$user['id']}'>имя кто доступ дал сюда</option>";
-                }?>
-            </select>  -->
+            <div class="flex" style="justify-content: start;">
+                <p>От:</p>
+                <? $haveAccessTo = delegatedWho($pdo); ?>
+                <select name="" id="">
+                    <? foreach ($haveAccessTo as $user) {
+                        echo "<option value='{$user['owner_id']}'>{$user['owner']}-{$user['owner_id']}</option>";
+                    } ?>
+                </select>
+            </div>
+            <div class="flex" style="justify-content: start;">
+                <label for="sum">Сколько $:</label>
+                <input type="number" name="sumTransfer" placeholder="3" value="5">
+            </div>
+            <button type="submit" style="color: blue">Получить</button>
         </form>
     </main>
 

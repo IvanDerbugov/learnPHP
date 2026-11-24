@@ -7,11 +7,11 @@ function delegatedWho (PDO $pdo) {
         echo 'error-config.php НЕ НАЙДЕН!' . "<br/>";
     }
 
-    $sql = 'SELECT owner_id
+    $sql = 'SELECT owner_id, owner
             FROM delegate
+            JOIN accounts ON accounts.id = delegate.owner_id
             WHERE delegate_id = :id';
-            // TODO нужно получать ещё имя кто доступ дал
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['id' => (int) $_SESSION['id']]);
-    return $haveAccessTo = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return $haveAccessTo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
