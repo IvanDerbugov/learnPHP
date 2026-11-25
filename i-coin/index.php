@@ -68,11 +68,11 @@ if (isset($_SESSION['id'])) {
         <br><br>
 
         <h3>Получить деньги</h3>
-        <form id="getMoney">
+        <form id="form-get-money">
             <div class="flex" style="justify-content: start;">
                 <p>От:</p>
                 <? $haveAccessTo = delegatedWho($pdo); ?>
-                <select name="" id="">
+                <select name="getMoneyFrom">
                     <? foreach ($haveAccessTo as $user) {
                         echo "<option value='{$user['owner_id']}'>{$user['owner']}-{$user['owner_id']}</option>";
                     } ?>
@@ -89,7 +89,7 @@ if (isset($_SESSION['id'])) {
     <? include $_SERVER['DOCUMENT_ROOT'] . "/learn-php/i-coin/partial/modals-acc.html"; ?>
     <script src="/learn-php/i-coin/scripts/script.js"></script>
     <script src="/learn-php/i-coin/scripts/modal.js"></script>
-    <script src="/learn-php/i-coin/scripts/sendMoney.js"></script>
+    <script src="/learn-php/i-coin/scripts/sendGetMoney.js"></script>
 </body>
 
 </html>

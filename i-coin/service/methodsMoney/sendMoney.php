@@ -53,7 +53,7 @@ if ($money >= $sumTransfer) {
         echo json_encode(['ok' => true]);
     } catch (PDOException $error) {
         $pdo->rollBack();
-        echo json_encode(['ok' => false]);
+        echo json_encode(['ok' => false, 'message' => $error], JSON_UNESCAPED_UNICODE);
     }
 } else {
     echo json_encode(['ok' => false]);
